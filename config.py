@@ -1,10 +1,6 @@
-import os
-from dotenv import load_dotenv
+import streamlit as st
 
-# Load environment variables from .env file if it exists
-load_dotenv()
-
-# OpenAI API Key - now loaded from environment variable
+# OpenAI API Key - loaded from Streamlit secrets
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 
 # Odoo connection details - loaded from Streamlit secrets
@@ -12,7 +8,6 @@ ODOO_URL = st.secrets["ODOO_URL"]
 ODOO_DB = st.secrets["ODOO_DB"]
 ODOO_USERNAME = st.secrets["ODOO_USERNAME"]
 ODOO_PASSWORD = st.secrets["ODOO_PASSWORD"]
-
 
 # Odoo model field mappings
 # Dictionary of relation models for resolving Many2one relationships
