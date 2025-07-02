@@ -5,13 +5,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # OpenAI API Key - now loaded from environment variable
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv(OPENAI_API_KEY)
 
 # Odoo connection details - loaded from environment variables
-ODOO_URL = os.getenv("ODOO_URL")
-ODOO_DB = os.getenv("ODOO_DB")
-ODOO_USERNAME = os.getenv("ODOO_USERNAME")
-ODOO_PASSWORD = os.getenv("ODOO_PASSWORD")
+ODOO_URL = os.getenv(ODOO_URL)
+ODOO_DB = os.getenv(ODOO_DB)
+ODOO_USERNAME = os.getenv(ODOO_USERNAME)
+ODOO_PASSWORD = os.getenv(ODOO_PASSWORD)
 
 # Odoo model field mappings
 # Dictionary of relation models for resolving Many2one relationships
