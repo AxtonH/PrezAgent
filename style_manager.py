@@ -57,6 +57,10 @@ class StyleManager:
                     text-align: left;
                     margin-bottom: 8px;
                 }
+                /* Hide user and assistant avatars */
+                img[alt="User"], img[alt="Assistant"] {
+                    display: none !important;
+                }
                 </style>
                 """
             ),
