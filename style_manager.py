@@ -1,4 +1,4 @@
-﻿# style_manager.py
+# style_manager.py
 import streamlit as st
 import os
 
@@ -24,7 +24,6 @@ class StyleManager:
             textwrap.dedent(
                 """
                 <style>
-                /* hide Streamlit chrome */
                 #MainMenu, footer {visibility:hidden;}
 
                 /* chat container */
