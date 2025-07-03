@@ -1,4 +1,4 @@
-﻿# ui_components.py
+# ui_components.py
 import streamlit as st
 import time
 import os
@@ -10,46 +10,37 @@ def load_css():
         with open(css_file) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
     else:
-        # Fallback CSS if file doesn't exist
+        # Fallback CSS if file doesn't exist (no chat bubble or chat alignment CSS)
         fallback_css = """
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
         :root {
             --primary-purple: #9B6DD6;
             --light-purple: #B794E6;
             --lilac-bg: #F3E8FF;
             --lilac-light: #F8F2FF;
             --dark-purple: #2B1B4C;
-            --chat-user-bg: #E7D4F9;
-            --chat-bot-bg: #FFFFFF;
             --border-purple: #D4B5F7;
         }
-        
         body {
             font-family: 'Inter', sans-serif;
             color: var(--dark-purple);
         }
-        
         .stApp {
             background: linear-gradient(135deg, #F3E8FF 0%, #FFFFFF 100%) !important;
             min-height: 100vh;
         }
-        
         .main > div {
             background: transparent !important;
         }
-        
         section[data-testid="stSidebar"] {
             background: rgba(248, 242, 255, 0.8) !important;
             backdrop-filter: blur(10px);
             border-right: 1px solid var(--border-purple);
         }
-        
         section[data-testid="stSidebar"] > div {
             background: transparent !important;
         }
-        
         .prezlab-logo {
             font-family: 'Inter', sans-serif;
             font-weight: 600;
@@ -58,11 +49,9 @@ def load_css():
             margin: 0;
             padding: 0;
         }
-        
         .point {
             color: var(--primary-purple);
         }
-        
         .scribble-bottom {
             display: block;
             height: 4px;
@@ -71,12 +60,10 @@ def load_css():
             margin: 10px 0 20px 0;
             width: 100px;
         }
-        
         .scribble-highlight {
             position: relative;
             display: inline-block;
         }
-        
         .scribble-highlight::after {
             content: '';
             position: absolute;
@@ -88,312 +75,7 @@ def load_css():
             border-radius: 3px;
             z-index: -1;
         }
-        
-        .chat-messages-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            height: 500px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .chat-message-wrapper {
-            display: flex;
-            width: 100%;
-            margin-bottom: 8px;
-        }
-        
-        .chat-message-user {
-            justify-content: flex-end;
-        }
-        
-        .chat-message-bot {
-            justify-content: flex-start;
-        }
-        
-        .chat-bubble {
-            max-width: 70%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            font-size: 15px;
-            line-height: 1.5;
-            word-wrap: break-word;
-            position: relative;
-        }
-        
-        .user-bubble {
-            background-color: var(--primary-purple);
-            color: white;
-            border-bottom-right-radius: 4px;
-            margin-right: 10px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        
-        .bot-bubble {
-            background-color: white;
-            color: var(--dark-purple);
-            border: 1px solid rgba(212, 181, 247, 0.3);
-            border-bottom-left-radius: 4px;
-            margin-left: 10px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        }
-        
-        .download-button-container {
-            display: flex;
-            justify-content: flex-start;
-            margin-left: 10px;
-            margin-top: 8px;
-            margin-bottom: 12px;
-        }
-        
-        .welcome-box {
-            text-align: center;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            margin-top: 20px;
-            box-shadow: 0 4px 12px rgba(155, 109, 214, 0.1);
-            border: 1px solid rgba(212, 181, 247, 0.3);
-        }
-        
-        .welcome-title {
-            color: var(--dark-purple);
-            font-weight: 600;
-            font-size: 24px;
-            margin-bottom: 16px;
-        }
-        
-        .welcome-text {
-            color: #666;
-            margin-bottom: 24px;
-            font-size: 16px;
-        }
-        
-        /* Simple scribble image as a CSS background */
-        .simple-scribble {
-            height: 8px;
-            width: 120px;
-            margin: 24px auto;
-            background-color: var(--light-purple);
-            border-radius: 4px;
-            position: relative;
-        }
-        
-        .simple-scribble::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 70%;
-            height: 100%;
-            background-color: var(--primary-purple);
-            border-radius: 4px;
-        }
-        
-        /* Login container styling - simplified without white box */
-        .login-container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        /* Beautiful gradient background for login page */
-        .login-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #F3E8FF 0%, #E7D4F9 50%, #F8F2FF 100%);
-            z-index: -1;
-        }
-        
-        /* Floating animation for decorative elements */
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-        
-            50% {
-                transform: translateY(-10px);
-            }
-        
-            100% {
-                transform: translateY(0px);
-            }
-        }
-        
-        /* Subtle glow effect */
-        @keyframes glow {
-            0% {
-                box-shadow: 0 8px 32px rgba(155, 109, 214, 0.1);
-            }
-        
-            50% {
-                box-shadow: 0 8px 40px rgba(155, 109, 214, 0.2);
-            }
-        
-            100% {
-                box-shadow: 0 8px 32px rgba(155, 109, 214, 0.1);
-            }
-        }
-        
-        /* Glass morphism card effect */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(183, 148, 230, 0.3);
-            border-radius: 16px;
-            animation: glow 3s ease-in-out infinite;
-        }
-        
-        /* Download button styling */
-        div[data-testid="stDownloadButton"] > button {
-            background-color: var(--primary-purple) !important;
-            color: white !important;
-            border: none !important;
-            padding: 0.5rem 2rem !important;
-            font-weight: 500 !important;
-            border-radius: 8px !important;
-            margin-top: 0.5rem !important;
-            transition: all 0.2s ease !important;
-        }
-        
-        div[data-testid="stDownloadButton"] > button:hover {
-            background-color: var(--light-purple) !important;
-            transform: translateY(-1px) !important;
-        }
-        
-        /* Progress bar styling */
-        .stProgress > div > div > div > div {
-            background-color: var(--primary-purple) !important;
-        }
-        
-        /* Success messages */
-        .stSuccess {
-            background-color: rgba(155, 109, 214, 0.1) !important;
-            border: 1px solid var(--light-purple) !important;
-            border-radius: 8px !important;
-            color: var(--dark-purple) !important;
-        }
-        
-        /* Error messages */
-        .stError {
-            background-color: rgba(255, 107, 107, 0.1) !important;
-            border: 1px solid #FF6B6B !important;
-            border-radius: 8px !important;
-        }
-        
-        /* Info messages */
-        .stInfo {
-            background-color: rgba(155, 109, 214, 0.08) !important;
-            border: 1px solid var(--border-purple) !important;
-            border-radius: 8px !important;
-            color: var(--dark-purple) !important;
-        }
-        
-        /* Text input styling */
-        .stTextInput > div > div > input {
-            background-color: white !important;
-            border: 1px solid var(--border-purple) !important;
-            border-radius: 8px !important;
-            padding: 0.75rem !important;
-            color: var(--dark-purple) !important;
-            transition: border-color 0.2s ease !important;
-        }
-        
-        .stTextInput > div > div > input:focus {
-            border-color: var(--primary-purple) !important;
-            box-shadow: 0 0 0 2px rgba(155, 109, 214, 0.2) !important;
-        }
-        
-        /* Checkbox styling */
-        .stCheckbox label {
-            color: var(--dark-purple) !important;
-        }
-        
-        /* Markdown text */
-        .stMarkdown {
-            color: var(--dark-purple);
-        }
-        
-        /* Code blocks */
-        .stCodeBlock {
-            background-color: rgba(155, 109, 214, 0.05) !important;
-            border: 1px solid var(--border-purple) !important;
-            border-radius: 8px !important;
-        }
-        
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--lilac-light);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--light-purple);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-purple);
-        }
-        
-        /* Chat input area enhancement */
-        .stChatInputContainer {
-            background-color: white;
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 -2px 8px rgba(155, 109, 214, 0.1);
-            border: 1px solid var(--border-purple);
-        }
-        
-        /* Make expanders more subtle */
-        .streamlit-expander {
-            border: 1px solid var(--border-purple) !important;
-            border-radius: 8px !important;
-            background-color: white !important;
-        }
-        
-        /* Enhanced input styling for login page */
-        .stTextInput > div > div > input {
-            background-color: rgba(255, 255, 255, 0.9) !important;
-            border: 2px solid rgba(183, 148, 230, 0.3) !important;
-            border-radius: 10px !important;
-            padding: 0.75rem 1rem !important;
-            font-size: 1rem !important;
-            transition: all 0.3s ease !important;
-        }
-        
-        .stTextInput > div > div > input:focus {
-            border-color: var(--primary-purple) !important;
-            box-shadow: 0 0 0 3px rgba(155, 109, 214, 0.1) !important;
-            background-color: white !important;
-        }
-        
-        .stTextInput > div > div > input::placeholder {
-            color: #999 !important;
-        }
-        
-        /* Form container glass effect */
-        [data-testid="stForm"] {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(183, 148, 230, 0.3);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(155, 109, 214, 0.1);
-        }
+        /* (All chat bubble, chat-message, chat-messages-container, user-bubble, bot-bubble, and related chat CSS removed) */
         </style>
         """
         st.markdown(fallback_css, unsafe_allow_html=True)
