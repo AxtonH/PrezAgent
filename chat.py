@@ -42,8 +42,7 @@ class ChatManager:
         # 3️⃣  history
         for msg in st.session_state.messages:
             with st.chat_message(msg["role"]):
-                role_class = "user" if msg["role"] == "user" else "assistant"
-                st.markdown(f'<div class="stChatMessage {role_class}">{msg["content"]}</div>', unsafe_allow_html=True)
+                st.markdown(msg["content"], unsafe_allow_html=True)
 
         st.markdown("<div style='margin-bottom:20px;'></div>", unsafe_allow_html=True)
 
@@ -54,12 +53,12 @@ class ChatManager:
             # user bubble
             self.add_message("user", prompt)
             with st.chat_message("user"):
-                st.markdown(f'<div class="stChatMessage user">{prompt}</div>', unsafe_allow_html=True)
+                st.markdown(prompt, unsafe_allow_html=True)
 
             # bot bubble
             with st.chat_message("assistant"):
                 with st.spinner("Thinking…"):
                     reply = generate_ai_response(prompt, employee_data)
-                st.markdown(f'<div class="stChatMessage assistant">{reply}</div>', unsafe_allow_html=True)
+                st.markdown(reply, unsafe_allow_html=True)
             self.add_message("assistant", reply)
 
