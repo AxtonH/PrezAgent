@@ -61,6 +61,13 @@ class StyleManager:
                 img[alt="User"], img[alt="Assistant"] {
                     display: none !important;
                 }
+                /* Hide all avatars/emojis in chat messages */
+                div[data-testid="stChatMessage"] img {
+                    display: none !important;
+                }
+                div[data-testid="stChatMessage"] > div:first-child {
+                    display: none !important;
+                }
                 </style>
                 """
             ),
