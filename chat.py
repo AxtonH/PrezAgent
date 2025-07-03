@@ -1,4 +1,4 @@
-﻿# chat.py
+# chat.py
 import streamlit as st
 from openai_helper import generate_ai_response
 from ui_components import render_chat_message
@@ -29,7 +29,7 @@ class ChatManager:
         # ─────────────────── UI / CHAT RENDERING ───────────────────
     def display_chat_interface(self, employee_data):
         """
-        Draws the conversation using Streamlit’s chat API
+        Draws the conversation using Streamlit's chat API
         while the CSS from StyleManager turns them into bubbles.
         """
         import streamlit as st
@@ -42,7 +42,8 @@ class ChatManager:
         # 3️⃣  history
         for msg in st.session_state.messages:
             with st.chat_message(msg["role"]):
-                st.markdown(msg["content"], unsafe_allow_html=True)
+                role_class = "user" if msg["role"] == "user" else "assistant"
+                st.markdown(f'<div class="stChatMessage {role_class}">{msg["content"]}</div>', unsafe_allow_html=True)
 
         st.markdown("<div style='margin-bottom:20px;'></div>", unsafe_allow_html=True)
 
@@ -53,12 +54,12 @@ class ChatManager:
             # user bubble
             self.add_message("user", prompt)
             with st.chat_message("user"):
-                st.markdown(prompt, unsafe_allow_html=True)
+                st.markdown(f'<div class="stChatMessage user">{prompt}</div>', unsafe_allow_html=True)
 
             # bot bubble
             with st.chat_message("assistant"):
                 with st.spinner("Thinking…"):
                     reply = generate_ai_response(prompt, employee_data)
-                st.markdown(reply, unsafe_allow_html=True)
+                st.markdown(f'<div class="stChatMessage assistant">{reply}</div>', unsafe_allow_html=True)
             self.add_message("assistant", reply)
 
