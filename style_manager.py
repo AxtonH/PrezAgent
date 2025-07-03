@@ -26,7 +26,10 @@ class StyleManager:
                 <style>
                 #MainMenu, footer {visibility:hidden;}
                 .user-bubble {
-                    background: #9B6DD6;
+                    display: flex;
+                    flex-direction: row-reverse;
+                    align-items: center;
+                    background: #B794E6; /* lighter purple */
                     color: #fff;
                     border-radius: 18px 18px 4px 18px;
                     margin-left: auto;
@@ -34,8 +37,12 @@ class StyleManager:
                     max-width: 70%;
                     padding: 12px 16px;
                     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-                    text-align: right;
+                    text-align: left;
                     margin-bottom: 8px;
+                }
+                .user-bubble span {
+                    flex: 1;
+                    text-align: left;
                 }
                 .bot-bubble {
                     background: #fff;
