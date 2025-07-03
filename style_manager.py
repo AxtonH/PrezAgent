@@ -25,46 +25,30 @@ class StyleManager:
                 """
                 <style>
                 #MainMenu, footer {visibility:hidden;}
-
-                /* chat container */
-                div[data-testid="stChatMessageContainer"]{
-                    display:flex;flex-direction:column;gap:14px;
+                .user-bubble {
+                    background: #9B6DD6;
+                    color: #fff;
+                    border-radius: 18px 18px 4px 18px;
+                    margin-left: auto;
+                    margin-right: 0;
+                    max-width: 70%;
+                    padding: 12px 16px;
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+                    text-align: right;
+                    margin-bottom: 8px;
                 }
-
-                /* ───────── VERTICAL-ALIGN FIX ───────── */
-                /* every message row is flex & centred */
-                div[data-testid="stChatMessage"]{
-                    display:flex !important;          /* override Streamlit default */
-                    align-items:center !important;    /* center avatar + bubble   */
-                    gap:12px;                         /* nice breathing room      */
-                }
-
-                /* USER (odd) – bubble right, avatar right */
-                div[data-testid="stChatMessage"]:nth-child(odd){
-                    flex-direction:row-reverse;
-                }
-                div[data-testid="stChatMessage"]:nth-child(odd) > div:nth-child(2){
-                    background:#FFFFFF;color:#2B1B4C;
-                    border:1px solid #E5E5E5;border-radius:18px 18px 4px 18px;
-                    padding:12px 16px;max-width:75%;text-align:left;
-                    box-shadow:0 1px 2px rgba(0,0,0,.06);
-                }
-
-                /* BOT (even) – bubble left, avatar left */
-                div[data-testid="stChatMessage"]:nth-child(even){
-                    flex-direction:row;
-                }
-                div[data-testid="stChatMessage"]:nth-child(even) > div:nth-child(2){
-                    background:#E6D4FF;color:#2B1B4C;
-                    border-radius:18px 18px 18px 4px;
-                    padding:12px 16px;max-width:75%;text-align:left;
-                    box-shadow:0 1px 2px rgba(0,0,0,.04);
-                }
-
-                /* tidy list indentation */
-                div[data-testid="stChatMessage"] ul,
-                div[data-testid="stChatMessage"] ol{
-                    margin:0 0 0 1.25em;
+                .bot-bubble {
+                    background: #fff;
+                    color: #2B1B4C;
+                    border: 1px solid #E5E5E5;
+                    border-radius: 18px 18px 18px 4px;
+                    margin-right: auto;
+                    margin-left: 0;
+                    max-width: 70%;
+                    padding: 12px 16px;
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+                    text-align: left;
+                    margin-bottom: 8px;
                 }
                 </style>
                 """
