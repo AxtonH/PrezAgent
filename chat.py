@@ -43,7 +43,7 @@ class ChatManager:
         for msg in st.session_state.messages:
             with st.chat_message(msg["role"]):
                 if msg["role"] == "user":
-                    st.markdown(f'<div class="user-bubble">{msg["content"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="user-bubble"><span>{msg["content"]}</span></div>', unsafe_allow_html=True)
                 else:
                     st.markdown(f'<div class="bot-bubble">{msg["content"]}</div>', unsafe_allow_html=True)
 
@@ -56,7 +56,7 @@ class ChatManager:
             # user bubble
             self.add_message("user", prompt)
             with st.chat_message("user"):
-                st.markdown(f'<div class="user-bubble">{prompt}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="user-bubble"><span>{prompt}</span></div>', unsafe_allow_html=True)
 
             # bot bubble
             with st.chat_message("assistant"):
